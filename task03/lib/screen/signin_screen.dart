@@ -37,13 +37,19 @@ class _SigninScreenState extends State<SigninScreen> {
     return Scaffold(
       backgroundColor: Colors.pink[50], // สีพื้นหลัง
       appBar: AppBar(
-        title: const Text('Todo'),
+        title: const Text(
+          'TODO',
+          style: TextStyle(
+            fontSize: 24, // ขนาดตัวอักษร
+            fontWeight: FontWeight.bold, // ตัวหนา
+          ),
+        ),
+        centerTitle: true, // จัดตำแหน่งข้อความตรงกลาง
         backgroundColor: const Color(0xFF03a9f4), // สีแถบด้านบน
       ),
       body: Center(
         child: Container(
-          height: 300,
-          width: 320,
+          width: 320, // กำหนดความกว้าง แต่ลบความสูงออกเพื่อให้อัตโนมัติ
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
             color: Colors.white, // สีพื้นหลังของฟอร์ม
@@ -57,78 +63,94 @@ class _SigninScreenState extends State<SigninScreen> {
               ),
             ],
           ),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    prefixIcon: const Icon(Icons.email),
-                  ),
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter your email' : null,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'TODO',
+                style: TextStyle(
+                  fontSize: 40, // ขนาดตัวอักษรของ "TODO"
+                  fontWeight: FontWeight.bold, // ตัวหนา
+                  color: Color.fromARGB(255, 0, 0, 0), // สีของข้อความ
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    prefixIcon: const Icon(Icons.lock),
-                  ),
-                  obscureText: true,
-                  validator: (value) =>
-                      value!.isEmpty ? 'Please enter your password' : null,
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+              ),
+              const SizedBox(height: 20), // ระยะห่างระหว่าง "TODO" และฟอร์ม
+              Form(
+                key: _formKey,
+                child: Column(
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(20.0), // ขอบปุ่มโค้ง
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
+                        prefixIcon: const Icon(Icons.email),
                       ),
-                      onPressed: _signin,
-                      child: const Text(
-                        'Sign In',
-                        style: TextStyle(fontSize: 18), // ขนาดตัวอักษรในปุ่ม
-                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your email' : null,
                     ),
-                    const SizedBox(width: 20), // ระยะห่างระหว่างปุ่ม
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(20.0), // ขอบปุ่มโค้ง
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupScreen()));
-                      },
-                      child: const Text(
-                        'Sign up',
-                        style: TextStyle(fontSize: 18), // ขนาดตัวอักษรในปุ่ม
-                      ),
+                      obscureText: true,
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your password' : null,
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment:
+                          MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(20.0), // ขอบปุ่มโค้ง
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignupScreen()));
+                          },
+                          child: const Text(
+                            'Sign Up',
+                            style:
+                                TextStyle(fontSize: 18), // ขนาดตัวอักษรในปุ่ม
+                          ),
+                        ),
+                        const SizedBox(width: 20), // ระยะห่างระหว่างปุ่ม
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(20.0), // ขอบปุ่มโค้ง
+                            ),
+                          ),
+                          onPressed: _signin,
+                          child: const Text(
+                            'Sign In',
+                            style:
+                                TextStyle(fontSize: 18), // ขนาดตัวอักษรในปุ่ม
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
